@@ -97,8 +97,8 @@ const Sidebar = (props) => {
 
     setImagesList([
       // "https://rednin.com/wp-content/uploads/2021/05/logolighttest.png",
-      "http://localhost:4000/img/background/background-blue.jpg",
-      "http://localhost:4000/img/background/background-blue.jpg",
+      // "http://localhost:4000/img/background/background-blue.jpg",
+      // "http://localhost:4000/img/background/background-blue.jpg",
       "http://localhost:4000/img/background/background-blue.jpg",
     ]);
 

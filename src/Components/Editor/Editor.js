@@ -229,6 +229,8 @@ const Editor = (props) => {
   };
   // Handle template click and show it
   const handleTemplateClickEditor = (name) => {
+    alert("once upon a time");
+
     axios
       .post(
         conf.endPoint + "/api/templates/return/editor",
@@ -614,6 +616,33 @@ const Editor = (props) => {
     // console.log(blob);
     // axios.post(conf.endPoint + "/api/template/download");
   };
+
+  const savefile = async () => {
+    debugger;
+    var dataUrl;
+    dataUrl = stageRef.current.toDataURL({ pixelRatio: 1 });
+    // downloadjs(dataUrl, "image.png");
+    const blob = await fetch(dataUrl).then((res) => res.blob());
+    console.log(blob);
+    console.log(exportWork());
+
+    const formData = new FormData();
+    formData.append("file", blob, "image.png");
+    formData.append("source", exportWork());
+    formData.append("Screen_Id", "123456789");
+    try {
+      const response = await axios({
+        method: "post",
+        url: `${conf.endPoint}players/savefile/123456789`,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // set custom dimentions
   const setCustomDimentions = (width, height) => {
     // console.log(`Width is ${width} and height is ${height}`);
@@ -726,10 +755,10 @@ const Editor = (props) => {
 
           <div
             onClick={() => {
-              setIsExportShowed(true);
+              savefile();
             }}
             className={"duplicate"}
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: "10px", width: "80px" }}
           >
             {/* exportStage() ; exportWork() */}
             Save
